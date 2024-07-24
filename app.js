@@ -3,8 +3,8 @@ const { Api } = require("./models");
 
 const app = async () => {
   try {
-    await Api.login();
-    await Api.getSetting();
+    Api.TOKEN = await Api.login();
+    Api.SETTING = await Api.getSetting();
     const gate = await Api.getGate();
     gate.scan();
   } catch (error) {

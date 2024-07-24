@@ -23,7 +23,7 @@ class Api {
 
     const data = await res.json();
     if (res.statusText !== "OK") throw new Error(data.message);
-    this.TOKEN = data.token;
+    return data.token;
   }
 
   static async getSetting() {
@@ -37,7 +37,7 @@ class Api {
 
     const data = await res.json();
     if (res.statusText !== "OK") throw new Error(data.message);
-    this.SETTING = data;
+    return data;
   }
 
   // return gate based on host ip address
