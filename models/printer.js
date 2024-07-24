@@ -15,7 +15,6 @@ class Printer {
       info_tambahan_tiket = "Jangan meninggalkan barang bawaan Anda",
     }
   ) {
-    const { nama_lokasi, info_tambahan_tiket } = setting;
     const { nama, jenis_kendaraan } = gate;
     const { time_in, nomor_barcode } = data;
 
