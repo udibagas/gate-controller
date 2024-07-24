@@ -1,3 +1,4 @@
+require("dotenv").config();
 const { Api } = require("./models");
 
 const app = async () => {
