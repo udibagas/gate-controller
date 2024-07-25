@@ -1,4 +1,4 @@
-const { SerialPort } = require("serialport");
+const { SerialPort, DelimiterParser } = require("serialport");
 const Printer = require("./printer");
 const player = require("./player");
 
@@ -47,9 +47,7 @@ class Gate {
       console.log(`Serial ${path} (${nama}) opened`);
     });
 
-    const parser = this.port.pipe(
-      new SerialPort.DelimiterParser({ delimiter: "#" })
-    );
+    const parser = this.port.pipe(new DelimiterParser({ delimiter: "#" }));
 
     parser.on("data", async (bufferData) => {
       const commands = ["LOOP1", "LOOP2", "STRUK", "EMRGN"];
