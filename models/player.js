@@ -9,7 +9,7 @@ class Player extends Sound {
 
   stopAndPlay(audio) {
     if (!this.stopped) this.stop();
-    this.play(`./sounds/${audio}`);
+    this.play(`../sounds/${audio}`);
   }
 }
 
