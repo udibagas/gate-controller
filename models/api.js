@@ -23,6 +23,7 @@ class Api {
 
     const data = await res.json();
     if (res.statusText !== "OK") throw new Error(data.message);
+    console.log(`Login success! TOKEN =`, data.token);
     return data.token;
   }
 
@@ -37,6 +38,7 @@ class Api {
 
     const data = await res.json();
     if (res.statusText !== "OK") throw new Error(data.message);
+    console.log(`SETTING =`, data);
     return data;
   }
 
@@ -62,6 +64,7 @@ class Api {
       printer,
     } = data;
 
+    console.log(`GATE =`, data);
     return new Gate(id, nama, jenis_kendaraan, path, baudrate, printer);
   }
 
