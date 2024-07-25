@@ -61,9 +61,6 @@ class Gate {
       const data = bufferData.toString();
       console.log(`${nama} : ${data}`);
 
-      // most likely will never happen
-      if (!commands.includes(data)) return;
-
       if (data == this.state) return; // kalau trigger yang sama berkali2 abaikan
       this.state = data;
 
