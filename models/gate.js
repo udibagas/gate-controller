@@ -64,6 +64,9 @@ class Gate {
       // most likely will never happen
       if (!commands.includes(data)) return;
 
+      if (data == this.state) return; // kalau trigger yang sama berkali2 abaikan
+      this.state = data;
+
       switch (data) {
         case "LOOP1":
           player.stopAndPlay(player.SELAMAT_DATANG);
