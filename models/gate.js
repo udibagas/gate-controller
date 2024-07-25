@@ -3,8 +3,8 @@ const Printer = require("./printer");
 const player = require("./player");
 
 class Gate {
-  STATE_VEHICLE_IN = "LOOP1";
-  STATE_VEHICLE_OUT = "LOOP2";
+  static STATE_VEHICLE_IN = "LOOP1";
+  static STATE_VEHICLE_OUT = "LOOP2";
 
   port;
   state;
@@ -55,7 +55,7 @@ class Gate {
       // most likely will never happen
       if (!commands.includes(data)) return;
 
-      if (this.state == this.STATE_VEHICLE_IN) {
+      if (this.state == Gate.STATE_VEHICLE_IN) {
         player.stopAndPlay(player.SELAMAT_DATANG);
         console.log(`${nama}: kendaraan masuk`);
 
