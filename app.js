@@ -9,6 +9,7 @@ const app = async () => {
     gate.scan();
   } catch (error) {
     console.error(error.message);
+    console.error(error.fileName, "line", error.lineNumber);
   }
 };
 
