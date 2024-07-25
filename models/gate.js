@@ -1,4 +1,4 @@
-const SerialPort = require("serialport");
+const { SerialPort } = require("serialport");
 const Printer = require("./printer");
 const player = require("./player");
 
