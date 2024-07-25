@@ -54,7 +54,7 @@ class Gate {
       console.log(`Serial ${path} (${nama}) opened`);
     });
 
-    const parser = this.port.pipe(new DelimiterParser({ delimiter: "#" }));
+    const parser = this.port.pipe(new DelimiterParser({ delimiter: "\n" }));
 
     parser.on("data", async (bufferData) => {
       const commands = ["LOOP1", "LOOP2", "STRUK", "EMRGN"];
