@@ -62,29 +62,36 @@ class Gate {
       const data = bufferData.toString();
       console.log(`${nama} : ${data}`);
 
-      // if (data == this.state) return; // kalau trigger yang sama berkali2 abaikan
-      // this.state = data;
+      if (data == this.state) return; // kalau trigger yang sama berkali2 abaikan
+      this.state = data;
 
-      if (data == "LOOP1") {
-        console.log(`${nama}: kendaraan masuk`);
-        player.stopAndPlay(player.SELAMAT_DATANG);
-      }
+      console.log(`STATE = `, this.state);
 
-      if (data == "STRUK") {
-        console.log(`${nama}: tombol struk ditekan`);
-        player.stopAndPlay(player.SILAKAN_AMBIL_TIKET);
+      switch (data) {
+        case "LOOP1":
+          console.log(`${nama}: kendaraan masuk`);
+          // player.stopAndPlay(player.SELAMAT_DATANG);
+          break;
 
-        try {
-          await this.saveDataAndOpenGate();
-          player.stopAndPlay(player.TERIMAKASIH);
-        } catch (error) {
-          console.error(error.message);
-        }
-      }
+        case "STRUK":
+          console.log(`${nama}: tombol struk ditekan`);
+          // player.stopAndPlay(player.SILAKAN_AMBIL_TIKET);
 
-      if (data == "EMRGN") {
-        console.log(`${nama}: tombol emergency ditekan`);
-        player.stopAndPlay(player.MOHON_TUNGGU);
+          try {
+            await this.saveDataAndOpenGate();
+            player.stopAndPlay(player.TERIMAKASIH);
+          } catch (error) {
+            console.error(error.message);
+          }
+          break;
+
+        case "EMRGN":
+          console.log(`${nama}: tombol emergency ditekan`);
+          // player.stopAndPlay(player.MOHON_TUNGGU);
+          break;
+
+        default:
+          break;
       }
     });
 
