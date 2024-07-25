@@ -20,8 +20,6 @@ class Gate {
 
   async reconnect() {
     try {
-      await this.reload();
-
       if (this.port instanceof SerialPort) {
         this.port = null;
       }
