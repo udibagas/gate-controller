@@ -57,7 +57,7 @@ class Gate {
     });
 
     const parser = this.port.pipe(
-      new ReadlineParser({ includeDelimiter: false, delimiter: "\n" })
+      new ReadlineParser({ includeDelimiter: false, delimiter: "\r\n" })
     );
 
     parser.on("data", async (data) => {
@@ -67,12 +67,12 @@ class Gate {
       this.state = data;
 
       switch (data) {
-        case "LOOP1\n":
+        case "LOOP1":
           console.log(`${nama}: kendaraan masuk`);
           player.stopAndPlay(player.SELAMAT_DATANG);
           break;
 
-        case "STRUK\n":
+        case "STRUK":
           console.log(`${nama}: tombol struk ditekan`);
           player.stopAndPlay(player.SILAKAN_AMBIL_TIKET);
 
@@ -84,7 +84,7 @@ class Gate {
           }
           break;
 
-        case "EMRGN\n":
+        case "EMRGN":
           console.log(`${nama}: tombol emergency ditekan`);
           player.stopAndPlay(player.MOHON_TUNGGU);
           break;
