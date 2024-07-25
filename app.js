@@ -8,8 +8,7 @@ const app = async () => {
     const gate = await Api.getGate();
     gate.scan();
   } catch (error) {
-    console.error(error.message);
-    console.error(error.fileName, "line", error.lineNumber);
+    console.error(error);
   }
 };
 
