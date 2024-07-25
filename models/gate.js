@@ -109,15 +109,18 @@ class Gate {
   async saveDataAndOpenGate() {
     const { nama, jenis_kendaraan, id } = this;
     const payload = { is_member: 0, jenis_kendaraan, gate_in_id: id };
-    const res = await fetch(`${process.env.API_BASE}/apiStore`, {
-      method: "POST",
-      body: JSON.stringify(payload),
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${this.token}`,
-      },
-    });
+    const res = await fetch(
+      `${process.env.API_BASE}/parkingTransaction/apiStore`,
+      {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${this.token}`,
+        },
+      }
+    );
 
     const json = await res.json();
     if (res.statusText != "OK") throw new Error(json.message);
