@@ -58,24 +58,21 @@ class Gate {
 
     const parser = this.port.pipe(new ReadlineParser());
 
-    parser.on("data", async (bufferData) => {
-      const data = bufferData.toString();
+    parser.on("data", async (data) => {
       console.log(`${nama} : ${data}`);
 
       if (data == this.state) return; // kalau trigger yang sama berkali2 abaikan
       this.state = data;
 
-      console.log(`STATE = `, this.state);
-
       switch (data) {
         case "LOOP1":
           console.log(`${nama}: kendaraan masuk`);
-          // player.stopAndPlay(player.SELAMAT_DATANG);
+          player.stopAndPlay(player.SELAMAT_DATANG);
           break;
 
         case "STRUK":
           console.log(`${nama}: tombol struk ditekan`);
-          // player.stopAndPlay(player.SILAKAN_AMBIL_TIKET);
+          player.stopAndPlay(player.SILAKAN_AMBIL_TIKET);
 
           try {
             await this.saveDataAndOpenGate();
@@ -87,7 +84,7 @@ class Gate {
 
         case "EMRGN":
           console.log(`${nama}: tombol emergency ditekan`);
-          // player.stopAndPlay(player.MOHON_TUNGGU);
+          player.stopAndPlay(player.MOHON_TUNGGU);
           break;
 
         default:
