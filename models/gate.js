@@ -56,13 +56,11 @@ class Gate {
       console.log(`Serial ${path} (${nama}) opened`);
     });
 
-    const parser = this.port.pipe(new ReadlineParser());
+    const parser = this.port.pipe(
+      new ReadlineParser({ includeDelimiter: false, delimiter: "\n" })
+    );
 
     parser.on("data", async (data) => {
-      if (data == "LOOP1") {
-        console.log("masuk kendaraan");
-      }
-
       console.log(`${nama} : ${data}`);
 
       if (data == this.state) return; // kalau trigger yang sama berkali2 abaikan
