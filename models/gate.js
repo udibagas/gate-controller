@@ -61,8 +61,8 @@ class Gate {
       const data = bufferData.toString();
       console.log(`${nama} : ${data}`);
 
-      if (data == this.state) return; // kalau trigger yang sama berkali2 abaikan
-      this.state = data;
+      // if (data == this.state) return; // kalau trigger yang sama berkali2 abaikan
+      // this.state = data;
 
       switch (data) {
         case "LOOP1":
