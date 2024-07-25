@@ -64,34 +64,32 @@ class Gate {
       // most likely will never happen
       if (!commands.includes(data)) return;
 
-      if (this.state == Gate.STATE_VEHICLE_IN) {
-        player.stopAndPlay(player.SELAMAT_DATANG);
-        console.log(`${nama}: kendaraan masuk`);
+      switch (data) {
+        case "LOOP1":
+          player.stopAndPlay(player.SELAMAT_DATANG);
+          console.log(`${nama}: kendaraan masuk`);
+          break;
 
-        switch (data) {
-          case "STRUK":
-            console.log(`${nama}: tombol struk ditekan`);
-            player.stopAndPlay(player.SILAKAN_AMBIL_TIKET);
+        case "STRUK":
+          console.log(`${nama}: tombol struk ditekan`);
+          player.stopAndPlay(player.SILAKAN_AMBIL_TIKET);
 
-            try {
-              await saveDataAndOpenGate(this);
-              player.stopAndPlay(player.TERIMAKASIH);
-            } catch (error) {
-              console.error(error.message);
-            }
-            break;
+          try {
+            await saveDataAndOpenGate(this);
+            player.stopAndPlay(player.TERIMAKASIH);
+          } catch (error) {
+            console.error(error.message);
+          }
+          break;
 
-          case "EMRGN":
-            console.log(`${nama}: tombol emergency ditekan`);
-            player.stopAndPlay(player.MOHON_TUNGGU);
-            break;
+        case "EMRGN":
+          console.log(`${nama}: tombol emergency ditekan`);
+          player.stopAndPlay(player.MOHON_TUNGGU);
+          break;
 
-          default:
-            break;
-        }
+        default:
+          break;
       }
-
-      this.state = data;
     });
 
     this.port.on("error", (error) => {
