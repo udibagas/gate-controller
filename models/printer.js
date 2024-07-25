@@ -1,10 +1,11 @@
 const SerialPort = require("serialport");
 
 class Printer {
-  constructor(id, nama, path) {
+  constructor(id, nama, path, type) {
     this.id = id;
     this.nama = nama;
     this.path = path;
+    this.type = type;
   }
 
   printTicket(

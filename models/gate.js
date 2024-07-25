@@ -26,7 +26,12 @@ class Gate {
     this.jenis_kendaraan = jenis_kendaraan;
     this.path = path;
     this.baudrate = baudrate;
-    this.printer = new Printer(printer.id, printer.nama, printer.path);
+    this.printer = new Printer(
+      printer.id,
+      printer.nama,
+      printer.path,
+      printer.type
+    );
   }
 
   async reconnect() {
@@ -125,7 +130,11 @@ class Gate {
     const json = await res.json();
     if (res.statusText != "OK") throw new Error(json.message);
     console.log(`${nama}: ${JSON.stringify(json)}`);
-    this.printer.printTicket(json, this, this.SETTING);
+
+    if (this.printer.type == "local") {
+      this.printer.printTicket(json, this);
+    }
+
     this.open(3);
   }
 }
