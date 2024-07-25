@@ -64,8 +64,9 @@ class Api {
       printer,
     } = data;
 
-    console.log(`GATE =`, data);
-    return new Gate(id, nama, jenis_kendaraan, path, baudrate, printer);
+    const gate = new Gate(id, nama, jenis_kendaraan, path, baudrate, printer);
+    console.log(`GATE =`, gate);
+    return gate;
   }
 
   static async saveDataAndOpenGate(gate) {
