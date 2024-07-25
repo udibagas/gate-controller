@@ -59,12 +59,19 @@ class Api {
       id,
       nama,
       jenis_kendaraan,
-      controller_ip_address: path,
+      controller_ip_address: ipAddress,
       controller_port: baudrate,
       printer,
     } = data;
 
-    const gate = new Gate(id, nama, jenis_kendaraan, path, baudrate, printer);
+    const gate = new Gate(
+      id,
+      nama,
+      ipAddress,
+      jenis_kendaraan,
+      baudrate,
+      printer
+    );
     console.log(`GATE =`, gate);
     return gate;
   }

@@ -9,9 +9,18 @@ class Gate {
   port;
   state;
 
-  constructor(id, nama, jenis_kendaraan, path, baudrate, printer) {
+  constructor(
+    id,
+    nama,
+    ipAddress,
+    jenis_kendaraan,
+    baudrate,
+    printer,
+    path = "/dev/ttyS0"
+  ) {
     this.id = id;
     this.nama = nama;
+    this.ipAddress = ipAddress;
     this.jenis_kendaraan = jenis_kendaraan;
     this.path = path;
     this.baudrate = baudrate;
