@@ -39,8 +39,8 @@ class Gate {
   }
 
   scan() {
-    const { nama, path, baudrate } = this;
-    this.port = new SerialPort({ path, baudrate });
+    const { nama, path, baudrate: baudRate } = this;
+    this.port = new SerialPort({ path, baudRate });
     console.log(`Connecting to gate ${nama}...`);
 
     this.port.on("open", () => {
