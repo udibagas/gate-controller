@@ -16,7 +16,7 @@ class Gate {
     jenis_kendaraan,
     baudrate,
     printer,
-    path = "/dev/ttyS0"
+    path = process.env.SERIAL_DEVICE
   ) {
     this.id = id;
     this.nama = nama;
