@@ -6,6 +6,7 @@ const app = async () => {
     Api.TOKEN = await Api.login();
     Api.SETTING = await Api.getSetting();
     const gate = await Api.getGate();
+    gate.token = Api.TOKEN;
     gate.scan();
   } catch (error) {
     console.error(error);

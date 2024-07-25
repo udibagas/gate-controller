@@ -6,6 +6,7 @@ class Gate {
   static STATE_VEHICLE_IN = "LOOP1";
   static STATE_VEHICLE_OUT = "LOOP2";
 
+  token;
   port;
   state;
 
@@ -57,7 +58,6 @@ class Gate {
     const parser = this.port.pipe(new ReadlineParser());
 
     parser.on("data", async (bufferData) => {
-      const commands = ["LOOP1", "LOOP2", "STRUK", "EMRGN"];
       const data = bufferData.toString();
       console.log(`${nama} : ${data}`);
 
@@ -66,8 +66,8 @@ class Gate {
 
       switch (data) {
         case "LOOP1":
-          player.stopAndPlay(player.SELAMAT_DATANG);
           console.log(`${nama}: kendaraan masuk`);
+          player.stopAndPlay(player.SELAMAT_DATANG);
           break;
 
         case "STRUK":
@@ -75,7 +75,7 @@ class Gate {
           player.stopAndPlay(player.SILAKAN_AMBIL_TIKET);
 
           try {
-            await saveDataAndOpenGate(this);
+            await this.saveDataAndOpenGate();
             player.stopAndPlay(player.TERIMAKASIH);
           } catch (error) {
             console.error(error.message);
@@ -101,6 +101,26 @@ class Gate {
   open(delay = 0.5) {
     const command = "A".repeat(delay / 0.5);
     this.port.write(Buffer.from(`${command}\n`));
+  }
+
+  async saveDataAndOpenGate() {
+    const { nama, jenis_kendaraan, id } = this;
+    const payload = { is_member: 0, jenis_kendaraan, gate_in_id: id };
+    const res = await fetch(`${process.env.API_BASE}/apiStore`, {
+      method: "POST",
+      body: JSON.stringify(payload),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${this.token}`,
+      },
+    });
+
+    const json = await res.json();
+    if (res.statusText != "OK") throw new Error(json.message);
+    console.log(`${nama}: ${JSON.stringify(json)}`);
+    this.printer.printTicket(json, this, this.SETTING);
+    this.open(3);
   }
 }
 
