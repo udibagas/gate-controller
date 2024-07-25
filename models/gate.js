@@ -1,4 +1,5 @@
 const { SerialPort, ReadlineParser } = require("serialport");
+const fetch = require("cross-fetch");
 const Printer = require("./printer");
 const player = require("./player");
 
