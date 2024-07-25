@@ -67,12 +67,12 @@ class Gate {
       this.state = data;
 
       switch (data) {
-        case "LOOP1":
+        case "LOOP1\n":
           console.log(`${nama}: kendaraan masuk`);
           player.stopAndPlay(player.SELAMAT_DATANG);
           break;
 
-        case "STRUK":
+        case "STRUK\n":
           console.log(`${nama}: tombol struk ditekan`);
           player.stopAndPlay(player.SILAKAN_AMBIL_TIKET);
 
@@ -84,12 +84,13 @@ class Gate {
           }
           break;
 
-        case "EMRGN":
+        case "EMRGN\n":
           console.log(`${nama}: tombol emergency ditekan`);
           player.stopAndPlay(player.MOHON_TUNGGU);
           break;
 
         default:
+          console.log("Invalid response");
           break;
       }
     });
