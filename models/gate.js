@@ -59,6 +59,7 @@ class Gate {
     const parser = this.port.pipe(new ReadlineParser());
 
     parser.on("data", async (data) => {
+      console.log(typeof data);
       console.log(`${nama} : ${data}`);
 
       if (data == this.state) return; // kalau trigger yang sama berkali2 abaikan
