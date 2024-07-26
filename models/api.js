@@ -2,8 +2,7 @@ const Gate = require("./gate");
 const { API_BASE, EMAIL, PASSWORD, DEVICE_NAME } = process.env;
 
 class Api {
-  static TOKEN;
-  static SETTING;
+  static token;
 
   static async login() {
     const payload = {
@@ -31,7 +30,7 @@ class Api {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: `Bearer ${this.TOKEN}`,
+        Authorization: `Bearer ${this.token}`,
       },
     });
 
@@ -46,7 +45,7 @@ class Api {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: `Bearer ${this.TOKEN}`,
+        Authorization: `Bearer ${this.token}`,
       },
       params: { status: true },
     });

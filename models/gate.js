@@ -133,7 +133,7 @@ class Gate {
     console.log(`${nama}: ${json.data.nomor_barcode}`);
 
     if (this.printer.type == "local") {
-      this.printer.printTicket(json.data, this, {}); // todo = passing setting
+      this.printer.printTicket(json.data, this); // todo = passing setting
     }
 
     this.open(3);

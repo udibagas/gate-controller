@@ -3,12 +3,12 @@ const { Api } = require("./models");
 
 const app = async () => {
   try {
-    Api.TOKEN = await Api.login();
-    console.log(`Login success! TOKEN =`, Api.TOKEN);
-    Api.SETTING = await Api.getSetting();
+    Api.token = await Api.login();
+    console.log(`Login success! TOKEN =`, Api.token);
     const gate = await Api.getGate();
-    console.log("Gate =", gate.nama);
-    gate.token = Api.TOKEN;
+    gate.token = Api.token;
+    gate.setting = await Api.getSetting();
+    console.log("Gate =", gate);
     gate.scan();
   } catch (error) {
     console.error(error);
