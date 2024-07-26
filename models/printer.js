@@ -1,4 +1,6 @@
 const { SerialPort } = require("serialport");
+const escpos = require("escpos");
+escpos.USB = require("escpos-usb");
 
 class Printer {
   constructor(id, nama, path, baudRate, type) {
@@ -7,9 +9,55 @@ class Printer {
     this.path = path;
     this.baudRate = baudRate;
     this.type = type;
+    this.device = new escpos.USB();
   }
 
   printTicket(
+    data,
+    gate,
+    {
+      nama_lokasi = "Mitrateknik",
+      info_tambahan_tiket = "Jangan meninggalkan barang bawaan Anda",
+    }
+  ) {
+    const { nama, jenis_kendaraan } = gate;
+    const { time_in, nomor_barcode } = data;
+
+    const [tanggal, jam] = new Date(time_in)
+      .toLocaleString("id-ID", {
+        dateStyle: "medium",
+        timeStyle: "long",
+      })
+      .split(", ");
+
+    const printer = new escpos.Printer(this.device, {});
+
+    this.device.open((err) => {
+      printer
+        .align("CT")
+        .text("TIKET PARKIR")
+        .size(2, 2)
+        .text(nama_lokasi)
+        .size(1, 1)
+        .align("LT")
+        .feed()
+        .text(`GATE       : ${nama}/${jenis_kendaraan}`)
+        .text(`TANGGAL    : ${tanggal}`)
+        .text(`JAM        : ${jam}`)
+        .feed()
+        .align("CT")
+        .barcode(nomor_barcode, "CODE128", {
+          height: 100,
+          position: "BLW",
+        })
+        .feed()
+        .text(info_tambahan_tiket)
+        .cut()
+        .close();
+    });
+  }
+
+  printTicketViaSerial(
     data,
     gate,
     {
