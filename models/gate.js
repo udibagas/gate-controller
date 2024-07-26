@@ -132,7 +132,7 @@ class Gate {
     console.log(`${nama}: ${JSON.stringify(json)}`);
 
     if (this.printer.type == "local") {
-      this.printer.printTicket(json, this, {}); // todo = passing setting
+      this.printer.printTicket(json.data, this, {}); // todo = passing setting
     }
 
     this.open(3);
