@@ -28,7 +28,7 @@ class Printer {
       })
       .split(", ");
 
-    const device = escpos.USB();
+    const device = new escpos.USB();
     const printer = new escpos.Printer(device, {});
 
     device.open((err) => {
