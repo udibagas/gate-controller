@@ -1,7 +1,14 @@
 const { SerialPort, ReadlineParser } = require("serialport");
 const fetch = require("cross-fetch");
 const Printer = require("./printer");
-const player = require("./player");
+const sound = require("sound-play");
+
+const {
+  SELAMAT_DATANG,
+  SILAKAN_AMBIL_TIKET,
+  TERIMAKASIH,
+  MOHON_TUNGGU,
+} = require("../sounds");
 
 class Gate {
   static STATE_VEHICLE_IN = "LOOP1";
@@ -33,6 +40,10 @@ class Gate {
       printer.port,
       printer.type
     );
+  }
+
+  playSound(audio) {
+    sound.play(`${__dirname}/../sounds/${audio}`);
   }
 
   async reconnect() {
@@ -75,16 +86,16 @@ class Gate {
       switch (data) {
         case "LOOP1":
           console.log(`${nama}: kendaraan masuk`);
-          player.stopAndPlay(player.SELAMAT_DATANG);
+          this.playSound(SELAMAT_DATANG);
           break;
 
         case "STRUK":
           console.log(`${nama}: tombol struk ditekan`);
-          player.stopAndPlay(player.SILAKAN_AMBIL_TIKET);
+          this.playSound(SILAKAN_AMBIL_TIKET);
 
           try {
             await this.saveDataAndOpenGate();
-            player.stopAndPlay(player.TERIMAKASIH);
+            this.playSound(TERIMAKASIH);
           } catch (error) {
             console.error(error.message);
           }
@@ -92,7 +103,7 @@ class Gate {
 
         case "EMRGN":
           console.log(`${nama}: tombol emergency ditekan`);
-          player.stopAndPlay(player.MOHON_TUNGGU);
+          this.playSound(MOHON_TUNGGU);
           break;
 
         default:
