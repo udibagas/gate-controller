@@ -1,10 +1,11 @@
 const { SerialPort } = require("serialport");
 
 class Printer {
-  constructor(id, nama, path, type) {
+  constructor(id, nama, path, baudRate, type) {
     this.id = id;
     this.nama = nama;
     this.path = path;
+    this.baudRate = baudRate;
     this.type = type;
   }
 
@@ -48,7 +49,7 @@ class Printer {
 
     const serial = new SerialPort({
       path: this.path,
-      baudrate: 9600,
+      baudRate: this.baudRate,
     });
 
     serial.on("open", () => {

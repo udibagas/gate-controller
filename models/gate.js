@@ -30,6 +30,7 @@ class Gate {
       printer.id,
       printer.nama,
       printer.ip_address,
+      printer.port,
       printer.type
     );
   }
