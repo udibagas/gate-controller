@@ -4,7 +4,7 @@ Requires=network.target
 
 [Service]
 User=root
-WorkingDirectory=/home/pos1/parking-system
+WorkingDirectory=/home/pos1/gate-controller
 ExecStart=/usr/local/bin/node app.js
 Restart=always
 RestartSec=3
