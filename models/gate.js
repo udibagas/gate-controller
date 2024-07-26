@@ -131,7 +131,7 @@ class Gate {
     if (res.statusText != "OK") throw new Error(json.message);
     console.log(`${nama}: ${JSON.stringify(json)}`);
 
-    if (this.printer.type == "local") {
+    if ((this.printer.type == "local", {})) {
       this.printer.printTicket(json, this);
     }
 
