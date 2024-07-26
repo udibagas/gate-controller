@@ -29,7 +29,7 @@ class Gate {
     this.printer = new Printer(
       printer.id,
       printer.nama,
-      printer.path,
+      printer.ip_address,
       printer.type
     );
   }
