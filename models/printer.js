@@ -1,7 +1,5 @@
 const { SerialPort } = require("serialport");
 const escpos = require("escpos");
-escpos.USB = require("escpos-usb");
-
 class Printer {
   constructor(id, nama, path, baudRate, type) {
     this.id = id;
@@ -9,7 +7,6 @@ class Printer {
     this.path = path;
     this.baudRate = baudRate;
     this.type = type;
-    this.device = new escpos.USB();
   }
 
   printTicket(
@@ -30,9 +27,10 @@ class Printer {
       })
       .split(", ");
 
-    const printer = new escpos.Printer(this.device, {});
+    const device = new escpos.USB();
+    const printer = new escpos.Printer(device, {});
 
-    this.device.open((err) => {
+    device.open((err) => {
       printer
         .align("CT")
         .text("TIKET PARKIR")
