@@ -27,9 +27,9 @@ class Printer {
 
     device.open((err) => {
       printer
-        .size(1, 1)
         .align("CT")
         .text("TIKET PARKIR")
+        // .size(2, 2)
         .text(nama_lokasi)
         // .size(1, 1)
         .feed(2)
