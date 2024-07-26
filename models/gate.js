@@ -43,7 +43,7 @@ class Gate {
   }
 
   playSound(audio) {
-    sound.play(`${__dirname}/../sounds/${audio}`);
+    sound.play(`${__dirname}/../sounds/${audio}`, 1);
   }
 
   async reconnect() {
