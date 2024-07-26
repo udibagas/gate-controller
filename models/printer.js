@@ -29,9 +29,9 @@ class Printer {
       printer
         .align("CT")
         .text("TIKET PARKIR")
-        .size(2, 2)
+        // .size(2, 2)
         .text(nama_lokasi)
-        .size(1, 1)
+        // .size(1, 1)
         .feed(2)
         .align("LT")
         .text(`GATE       : ${nama}/${jenis_kendaraan}`)
