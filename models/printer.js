@@ -49,7 +49,11 @@ class Printer {
 
     const serial = new SerialPort({
       path: this.path,
-      baudRate: this.baudRate,
+      baudRate: Number(this.baudRate),
+      dataBits: 8,
+      parity: "none",
+      stopBits: 1,
+      flowControl: false,
     });
 
     serial.on("open", () => {
@@ -60,6 +64,8 @@ class Printer {
     serial.on("error", (err) => {
       console.error(
         `Failed to connect to printer ${this.nama}: ${err.message}`
+
+        // Inappropriate ioctl for device setting custom baud rate of 9600
       );
     });
   }
