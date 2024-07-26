@@ -1,7 +1,9 @@
 const { SerialPort, ReadlineParser } = require("serialport");
 const fetch = require("cross-fetch");
 const Printer = require("./printer");
-const sound = require("sound-play");
+var player = require("play-sound")({
+  player: "mpg123",
+});
 
 const {
   SELAMAT_DATANG,
@@ -43,7 +45,9 @@ class Gate {
   }
 
   playSound(audio) {
-    sound.play(`${__dirname}/../sounds/${audio}`, 1);
+    player.play(`${__dirname}/../sounds/${audio}`, {}, (err) => {
+      console.log(err);
+    });
   }
 
   async reconnect() {
