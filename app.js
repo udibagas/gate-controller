@@ -7,7 +7,7 @@ const app = async () => {
     console.log(`Login success! TOKEN =`, Api.TOKEN);
     Api.SETTING = await Api.getSetting();
     const gate = await Api.getGate();
-    console.log("Gate", gate);
+    console.log("Gate =", gate.nama);
     gate.token = Api.TOKEN;
     gate.scan();
   } catch (error) {
