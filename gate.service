@@ -1,0 +1,12 @@
+[Unit]
+Description=Gate Controller
+Requires=network.target
+
+[Service]
+User=root
+ExecStart=/usr/local/bin/node /home/[pos1]/parking-system/app.js
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
