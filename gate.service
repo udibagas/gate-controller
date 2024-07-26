@@ -4,7 +4,8 @@ Requires=network.target
 
 [Service]
 User=root
-ExecStart=/usr/local/bin/node /home/[pos1]/parking-system/app.js
+WorkingDirectory=/home/pos1/parking-system
+ExecStart=/usr/local/bin/node app.js
 Restart=always
 RestartSec=3
 
