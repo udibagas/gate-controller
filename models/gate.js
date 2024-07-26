@@ -129,7 +129,7 @@ class Gate {
 
     const json = await res.json();
     if (res.statusText != "OK") throw new Error(json.message);
-    console.log(`${nama}: ${JSON.stringify(json)}`);
+    console.log(`${nama}: ${json.data.nomor_barcode}`);
 
     if (this.printer.type == "local") {
       this.printer.printTicket(json.data, this, {}); // todo = passing setting
