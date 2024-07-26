@@ -35,8 +35,8 @@ class Printer {
         .feed(2)
         .align("LT")
         .text(`GATE       : ${nama}/${jenis_kendaraan}`)
-        .text(`TANGGAL    : ${tanggal}`)
-        .text(`JAM        : ${jam}`)
+        .text(`TANGGAL    : ${tanggal.replaceAll(" ", "-")}`)
+        .text(`JAM        : ${jam.replaceAll(".", ":")}`)
         .feed(2)
         .align("CT")
         .barcode(nomor_barcode, "CODE39", {
