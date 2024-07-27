@@ -156,7 +156,11 @@ class Gate {
     console.log(`${nama}: ${json.data.nomor_barcode}`);
 
     if (this.printer.type == "local") {
-      this.printer.printTicket(json.data, this); // todo = passing setting
+      try {
+        this.printer.printTicket(json.data, this); // todo = passing setting
+      } catch (error) {
+        console.error(`Gagal mencetak tiket ${json.data.nomor_barcode}`);
+      }
     }
 
     this.open(3);
