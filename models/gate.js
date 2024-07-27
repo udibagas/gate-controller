@@ -95,11 +95,10 @@ class Gate {
 
         case "STRUK":
           console.log(`${nama}: tombol struk ditekan`);
-          this.playSound(SILAKAN_AMBIL_TIKET);
 
           try {
             await this.saveDataAndOpenGate();
-            this.playSound(TERIMAKASIH);
+            this.playSound(SILAKAN_AMBIL_TIKET);
           } catch (error) {
             console.error(error.message);
           }
