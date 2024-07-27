@@ -1,4 +1,5 @@
 const { SerialPort, ReadlineParser } = require("serialport");
+const { ChildProcess } = require("child_process");
 const fetch = require("cross-fetch");
 const Printer = require("./printer");
 var player = require("play-sound")({
@@ -8,7 +9,6 @@ var player = require("play-sound")({
 const {
   SELAMAT_DATANG,
   SILAKAN_AMBIL_TIKET,
-  TERIMAKASIH,
   MOHON_TUNGGU,
 } = require("../sounds");
 
@@ -19,6 +19,7 @@ class Gate {
   token;
   port;
   state;
+  activeSound;
 
   constructor(
     id,
@@ -45,9 +46,17 @@ class Gate {
   }
 
   playSound(audio) {
-    player.play(`${__dirname}/../sounds/${audio}`, {}, (err) => {
-      console.log(err);
-    });
+    if (this.activeSound instanceof ChildProcess) {
+      this.activeSound.kill();
+    }
+
+    this.activeSound = player.play(
+      `${__dirname}/../sounds/${audio}`,
+      {},
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   async reconnect() {
