@@ -20,6 +20,7 @@ class Gate {
   port;
   state;
   activeSound;
+  vehicleIn = false;
 
   constructor(
     id,
@@ -98,11 +99,13 @@ class Gate {
 
       switch (data) {
         case "LOOP1":
+          this.vehicleIn = true;
           console.log(`${nama}: kendaraan masuk`);
           this.playSound(SELAMAT_DATANG);
           break;
 
         case "STRUK":
+          if (!this.vehicleIn) return;
           console.log(`${nama}: tombol struk ditekan`);
 
           try {
@@ -114,11 +117,13 @@ class Gate {
           break;
 
         case "EMRGN":
+          if (!this.vehicleIn) return;
           console.log(`${nama}: tombol emergency ditekan`);
           this.playSound(MOHON_TUNGGU);
           break;
 
         default:
+          this.vehicleIn = false;
           console.log("Invalid response");
           break;
       }
