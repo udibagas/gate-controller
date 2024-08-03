@@ -13,12 +13,8 @@ const {
 } = require("../sounds");
 
 class Gate {
-  static STATE_VEHICLE_IN = "LOOP1";
-  static STATE_VEHICLE_OUT = "LOOP2";
-
   token;
   port;
-  state;
   activeSound;
   vehicleIn = false;
 
@@ -81,10 +77,10 @@ class Gate {
   scan() {
     const { nama, path, baudrate: baudRate } = this;
     this.port = new SerialPort({ path, baudRate });
-    console.log(`Connecting to gate ${nama}...`);
+    console.log(`${nama}: CONNECTING ...`);
 
     this.port.on("open", () => {
-      console.log(`Serial ${path} (${nama}) opened`);
+      console.log(`${nama}: CONNECTED`);
     });
 
     const parser = this.port.pipe(
@@ -94,19 +90,14 @@ class Gate {
     parser.on("data", async (data) => {
       console.log(`${nama} : ${data}`);
 
-      if (data == this.state) return; // kalau trigger yang sama berkali2 abaikan
-      this.state = data;
-
       switch (data) {
         case "LOOP1":
           this.vehicleIn = true;
-          console.log(`${nama}: kendaraan masuk`);
           this.playSound(SELAMAT_DATANG);
           break;
 
         case "STRUK":
           if (!this.vehicleIn) return;
-          console.log(`${nama}: tombol struk ditekan`);
 
           try {
             await this.saveDataAndOpenGate();
@@ -118,13 +109,12 @@ class Gate {
 
         case "EMRGN":
           if (!this.vehicleIn) return;
-          console.log(`${nama}: tombol emergency ditekan`);
           this.playSound(MOHON_TUNGGU);
           break;
 
         default:
           this.vehicleIn = false;
-          console.log("Invalid response");
+          console.log(`${nama}: RESET`);
           break;
       }
     });
